@@ -13,7 +13,6 @@
    $(function() {
       registerEventsOnDomElements();
       initialize();
-      initialize();
    });
 
    /****************************************************
@@ -211,25 +210,27 @@
       var locations = [];
       var platforms = [];
       for( var index = 0; index < APPLICATION_DATA.length; index++ ) {
-         if( ( APPLICATION_DATA[index].Pillar.indexOf( selectedCoreTeam ) > -1 ) &&
-             ( APPLICATION_DATA[index].App_Name.indexOf( selectedApp ) > -1 ) &&
-             ( APPLICATION_DATA[index].Sprint_Id.indexOf( selectedSprint ) > -1 ) &&
-             ( APPLICATION_DATA[index].Platform.indexOf( selectedPlatform ) > -1 ) &&
-             ( APPLICATION_DATA[index].Executed_At.indexOf( selectedLocation ) > -1 ) ) {
-            if ( coreTeams.indexOf( APPLICATION_DATA[index].Pillar ) === -1 ) {
-               coreTeams.push( APPLICATION_DATA[index].Pillar );
-            }
+         if ( coreTeams.indexOf( APPLICATION_DATA[index].Pillar ) === -1 ) {
+            coreTeams.push( APPLICATION_DATA[index].Pillar );
+         }
+         if( APPLICATION_DATA[index].Pillar.indexOf( selectedCoreTeam ) > -1 ) {
             if ( apps.indexOf( APPLICATION_DATA[index].App_Name ) === -1 ) {
                apps.push( APPLICATION_DATA[index].App_Name );
             }
-            if ( sprints.indexOf( APPLICATION_DATA[index].Sprint_Id ) === -1 ) {
-               sprints.push( APPLICATION_DATA[index].Sprint_Id );
-            }
-            if ( locations.indexOf( APPLICATION_DATA[index].Executed_At ) === -1 ) {
-               locations.push( APPLICATION_DATA[index].Executed_At );
-            }
-            if ( platforms.indexOf( APPLICATION_DATA[index].Platform ) === -1 ) {
-               platforms.push( APPLICATION_DATA[index].Platform );
+            if( APPLICATION_DATA[index].App_Name.indexOf( selectedApp ) > -1 ) {
+               if ( sprints.indexOf( APPLICATION_DATA[index].Sprint_Id ) === -1 ) {
+                  sprints.push( APPLICATION_DATA[index].Sprint_Id );
+               }  
+               if( APPLICATION_DATA[index].Sprint_Id.indexOf( selectedSprint ) > -1 ) {
+                  if ( locations.indexOf( APPLICATION_DATA[index].Executed_At ) === -1 ) {
+                     locations.push( APPLICATION_DATA[index].Executed_At );
+                  }
+                  if( APPLICATION_DATA[index].Platform.indexOf( selectedPlatform ) > -1 ) {
+                     if ( platforms.indexOf( APPLICATION_DATA[index].Platform ) === -1 ) {
+                        platforms.push( APPLICATION_DATA[index].Platform );
+                     }                     
+                  }
+               }
             }
          }
       }
@@ -238,6 +239,12 @@
       drawMenuItems( sprints, "menuTableSprint" );
       drawMenuItems( locations, "menuTableLocation" );
       drawMenuItems( platforms, "menuTablePlatform" ); 
+      
+      $("#spanCoreTeam").html( selectedCoreTeam );
+      $("#spanApp").html( selectedApp );
+      $("#spanSprint").html( selectedSprint );
+      $("#spanLocation").html( selectedLocation );
+      $("#spanPlatform").html( selectedPlatform );
       
       $(".menutable table td").on( "click", function() {
          switch ( $(this).parents("li").find(".name").html() ) {

@@ -248,8 +248,13 @@
       
       $(".menutable table td").on( "click", function() {
          switch ( $(this).parents("li").find(".name").html() ) {
+            case "Core Team" : selectedCoreTeam = ( $(this).html() !== "All" ) ? $(this).html() : "";
+               selectedApp = "";
+               selectedLocation = "";
+               selectedPlatform = "";
+               selectedSprint = "";
+               break;
             case "App"       : selectedApp      = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
-            case "Core Team" : selectedCoreTeam = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
             case "Sprint"    : selectedSprint   = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
             case "Location"  : selectedLocation = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
             case "Platform"  : selectedPlatform = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;

@@ -45,6 +45,7 @@
     * Param    : name of menu class                    *
     ****************************************************/
    function drawMenuItems( menuItem, name ) {
+      menuItem.sort();
       var dom = "<tr><td>All</td></tr>";
       for( var index = 0; index < menuItem.length; index++ ) {
          dom += "<tr><td>" + menuItem[index] + "</td></tr>";

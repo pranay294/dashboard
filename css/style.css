@@ -20,7 +20,7 @@ body { font-family: HP Simplified w04 Regular; position:absolute; padding:0; mar
 .legendLabelsprint, .legendLabelapp, .legendLabellocation, .legendLabelcoreteam, .legendLabelplatform { font-weight:bold; font-size:14px; }
 .sideBox { overflow:auto; }
 span.name:after { content : url('../img/down.gif'); margin:0 5px; }
-span.child { display:block; top:20px; font-size:12px; font-weight:normal; left:-25%; }
+span.child { display:block; top:20px; font-size:12px; font-weight:normal; left:-25%; color:#0096d6 }
 span.name { display:inline-block; }
 #container5 { height:423px; }
 

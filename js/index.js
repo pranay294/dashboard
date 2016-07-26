@@ -2,7 +2,7 @@
    var selectedCoreTeam = "";
    var selectedApp = "";
    var selectedSprint = "";
-   var seletcedLocation = "";
+   var selectedLocation = "";
    var selectedPlatform = "";
    
    /****************************************************
@@ -13,7 +13,7 @@
    $(function() {
       registerEventsOnDomElements();
       initialize();
-      filterContent();
+      initialize();
    });
 
    /****************************************************
@@ -40,61 +40,6 @@
    };
    
    /****************************************************
-    * Function : intialize                             *
-    * Brief    : Initialize the DOM structure          *
-    * Param    : None                                  *
-    ****************************************************/
-   function initialize() {
-      var apps = [];
-      var coreTeams = [];
-      var sprints = [];
-      var locations = [];
-      var platforms = [];
-      for( var index = 0; index < APPLICATION_DATA.length; index++ ) {
-         if ( coreTeams.indexOf( APPLICATION_DATA[index].Pillar ) === -1 ) {
-            coreTeams.push( APPLICATION_DATA[index].Pillar );
-         }
-         if ( apps.indexOf( APPLICATION_DATA[index].App_Name ) === -1 ) {
-            apps.push( APPLICATION_DATA[index].App_Name );
-         }
-         if ( sprints.indexOf( APPLICATION_DATA[index].Sprint_Id ) === -1 ) {
-            sprints.push( APPLICATION_DATA[index].Sprint_Id );
-         }
-         if ( locations.indexOf( APPLICATION_DATA[index].Executed_At ) === -1 ) {
-            locations.push( APPLICATION_DATA[index].Executed_At );
-         }
-         if ( platforms.indexOf( APPLICATION_DATA[index].Platform ) === -1 ) {
-            platforms.push( APPLICATION_DATA[index].Platform );
-         }
-      }
-      drawMenuItems( apps, "menuTableApp" );
-      drawMenuItems( coreTeams, "menuTableCoreTeam" );
-      drawMenuItems( sprints, "menuTableSprint" );
-      drawMenuItems( locations, "menuTableLocation" );
-      drawMenuItems( platforms, "menuTablePlatform" );
-      
-      $(".menutable table td").on( "click", function() {
-         switch ( $(this).parents("li").find(".name").html() ) {
-            case "App"       : selectedApp      = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
-            case "Core Team" : selectedCoreTeam = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
-            case "Sprint"    : selectedSprint   = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
-            case "Location"  : seletcedLocation = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
-            case "Platform"  : selectedPlatform = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
-            default          : break;
-         }
-         $(".menutable").hide();
-         filterContent();
-      });
-      $(".menutable table td").on( "mouseover", function() {
-         $(this).parents("li").find("table").find("td").css("background","");
-         $(this).css("background","#0096d6");
-      });
-      $(".content").on("click", function() {
-         $(".menutable").hide();
-      });
-   };
-   
-   /****************************************************
     * Function : drawMenuItems                         *
     * Brief    : Add menu options to menu bar          *
     * Param    : menuItem                              *
@@ -109,11 +54,11 @@
    };
    
    /****************************************************
-    * Function : filterContent                         *
+    * Function : initialize                            *
     * Brief    : Filter content based on content       *
     * Param    : None                                  *
     ****************************************************/
-   function filterContent() {
+   function initialize() {
       var data = [];
       var pass = 0;
       var fail = 0;
@@ -122,11 +67,14 @@
       var testsPerCoreTeam = {};
       var testsPerLocation = {};
       var testsPerPlatform = {};
+      
+      createMenu();
+      
       for( var index = 0; index < APPLICATION_DATA.length; index++ ) {
          if ( ( APPLICATION_DATA[index].App_Name.indexOf( selectedApp ) > -1 ) &&
               ( APPLICATION_DATA[index].Pillar.indexOf( selectedCoreTeam ) > -1 ) &&
               ( APPLICATION_DATA[index].Sprint_Id.indexOf( selectedSprint ) > -1 ) &&
-              ( APPLICATION_DATA[index].Executed_At.indexOf( seletcedLocation ) > -1 ) &&
+              ( APPLICATION_DATA[index].Executed_At.indexOf( selectedLocation ) > -1 ) &&
               ( APPLICATION_DATA[index].Platform.indexOf( selectedPlatform ) > -1 ) ) {
             data.push( APPLICATION_DATA[index] );
             if( !testsPerApp[ APPLICATION_DATA[index].App_Name ] ) {
@@ -249,5 +197,66 @@
          type: 'multi',
          title: 'Tests per Core Team'
       });      
+   };
+ 
+   /****************************************************
+    * Function : createMenu                            *
+    * Brief    : Display Menu Bar                      *
+    * Param    : None                                  *
+    ****************************************************/ 
+   function createMenu() {
+      var apps = [];
+      var coreTeams = [];
+      var sprints = [];
+      var locations = [];
+      var platforms = [];
+      for( var index = 0; index < APPLICATION_DATA.length; index++ ) {
+         if( ( APPLICATION_DATA[index].Pillar.indexOf( selectedCoreTeam ) > -1 ) &&
+             ( APPLICATION_DATA[index].App_Name.indexOf( selectedApp ) > -1 ) &&
+             ( APPLICATION_DATA[index].Sprint_Id.indexOf( selectedSprint ) > -1 ) &&
+             ( APPLICATION_DATA[index].Platform.indexOf( selectedPlatform ) > -1 ) &&
+             ( APPLICATION_DATA[index].Executed_At.indexOf( selectedLocation ) > -1 ) ) {
+            if ( coreTeams.indexOf( APPLICATION_DATA[index].Pillar ) === -1 ) {
+               coreTeams.push( APPLICATION_DATA[index].Pillar );
+            }
+            if ( apps.indexOf( APPLICATION_DATA[index].App_Name ) === -1 ) {
+               apps.push( APPLICATION_DATA[index].App_Name );
+            }
+            if ( sprints.indexOf( APPLICATION_DATA[index].Sprint_Id ) === -1 ) {
+               sprints.push( APPLICATION_DATA[index].Sprint_Id );
+            }
+            if ( locations.indexOf( APPLICATION_DATA[index].Executed_At ) === -1 ) {
+               locations.push( APPLICATION_DATA[index].Executed_At );
+            }
+            if ( platforms.indexOf( APPLICATION_DATA[index].Platform ) === -1 ) {
+               platforms.push( APPLICATION_DATA[index].Platform );
+            }
+         }
+      }
+      drawMenuItems( apps, "menuTableApp" );
+      drawMenuItems( coreTeams, "menuTableCoreTeam" );
+      drawMenuItems( sprints, "menuTableSprint" );
+      drawMenuItems( locations, "menuTableLocation" );
+      drawMenuItems( platforms, "menuTablePlatform" ); 
+      
+      $(".menutable table td").on( "click", function() {
+         switch ( $(this).parents("li").find(".name").html() ) {
+            case "App"       : selectedApp      = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
+            case "Core Team" : selectedCoreTeam = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
+            case "Sprint"    : selectedSprint   = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
+            case "Location"  : selectedLocation = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
+            case "Platform"  : selectedPlatform = ( $(this).html() !== "All" ) ? $(this).html() : ""; break;
+            default          : break;
+         }
+         $(".menutable").hide();
+         initialize();
+      });
+      $(".menutable table td").on( "mouseover", function() {
+         $(this).parents("li").find("table").find("td").css("background","");
+         $(this).css("background","#0096d6");
+      });
+      $(".content").on("click", function() {
+         $(".menutable").hide();
+      });     
    };
 })();

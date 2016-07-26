@@ -1703,4 +1703,64 @@ var APPLICATION_DATA = [
       "Platform"       : "Autobot",
       "Pillar"         : "BASE"
    },
+   {
+	   "App_Name": "Smart office IoT -Android",
+	   "Test_Case_Id": "SFT-IOT-Android-001",
+	   "Sprint_Id": "1A",
+	   "Date": "7/21/2015",
+	   "Test_Result": "Fail",
+	   "Severity": "P1",
+   	"Current_Status": "Open",
+	   "Executed_At": "BLR",
+	   "Platform": "Pitt",
+	   "Pillar": "Smart Office"
+   },
+   {
+   	"App_Name": "Smart office IoT -Android",
+	   "Test_Case_Id": "SFT-IOT-Android-002",
+	   "Sprint_Id": "1A",
+	   "Date": "7/21/2015",
+	   "Test_Result": "Pass",
+	   "Severity": "P1",
+	   "Current_Status": "Open",
+	   "Executed_At": "BLR",
+	   "Platform": "Pitt",
+	   "Pillar": "Smart Office"
+   },
+   {
+	   "App_Name": "Smart office IoT -Android",
+   	"Test_Case_Id": "SFT-IOT-Android-002",
+	   "Sprint_Id": "2A",
+	   "Date": "7/21/2015",
+	   "Test_Result": "Pass",
+	   "Severity": "P1",
+	   "Current_Status": "Open",
+	   "Executed_At": "BLR",
+	   "Platform": "Oldman",
+	   "Pillar": "Smart Office"
+   },
+   {
+	   "App_Name": "Smart office IoT -Android",
+	   "Test_Case_Id": "SFT-IOT-Apple-003",
+	   "Sprint_Id": "1A",
+	   "Date": "7/21/2015",
+	   "Test_Result": "Pass",
+	   "Severity": "P1",
+	   "Current_Status": "Open",
+	   "Executed_At": "HOU",
+	   "Platform": "Pitt",
+	   "Pillar": "Smart Office"
+   },
+   {
+   	"App_Name": "Smart office IoT -Android",
+	   "Test_Case_Id": "SFT-IOT-Apple-001",
+	   "Sprint_Id": "1A",
+	   "Date": "7/21/2015",
+	   "Test_Result": "Fail",
+	   "Severity": "P1",
+	   "Current_Status": "Open",
+	   "Executed_At": "HOU",
+	   "Platform": "Pitt",
+	   "Pillar": "Smart Office"
+   }
 ];

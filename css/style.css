@@ -7,6 +7,7 @@
 }
 
 body { font-family: HP Simplified w04 Regular; position:absolute; padding:0; margin:0; left:0; top:0; right:0; bottom:0; overflow:hidden; background:#d9d9d9; font-size:12px; }
+
 .header{ position:absolute; top:10px; height:90px; right:10px; left:10px; background:#F3F3F3; border-radius:10px; border:1px solid black; }
 .title { font-weight:bold; font-size:30px; position:absolute; text-align:center; width:100%; color:#0096d6; }
 .logo  { position:absolute; height:60px; width:60px; left:20px; top:20px; cursor:pointer; }

@@ -6,7 +6,6 @@
    <script src="js/data.js"></script>
    <script src="js/jquery-1.7.1.js"></script>
    <script src="js/PieChart.js"></script>
-   <script src="js/jqBarGraph.1.1.js"></script>
    <script src="js/index.js"></script>
 
    
@@ -14,6 +13,7 @@
 <body>
    <div class="header">
       <div class="title">HPI CMIT Software Functional Test Dashboard</div>
+      <div class="dateTime"></div>
       <img class="logo" src="img/logo.png"/>
       <div class="menuBar">
          <ul class="menuItems">
@@ -26,57 +26,19 @@
       </div>
    </div>
    <div class="content">
-      <div class="container sideBox" id="container0">
-         <div class="con">
-            <div class="row">
-               <div class="coreteam">
-                  <div id="coreteam"></div> 
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container sideBox" id="container1">
-         <div class="con">
-            <div class="row">
-               <div class="app">
-                  <div id="app"></div> 
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container sideBox" id="container2">
-         <div class="con">
-            <div class="row">
-               <div class="sprint">
-                  <div id="sprint"></div> 
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container sideBox" id="container3">
-         <div class="con">
-            <div class="row">
-               <div class="location">
-                  <div id="location"></div> 
-               </div>
-            </div>
-         </div>      
-      </div>
-      <div class="container sideBox" id="container4">
-         <div class="con">
-            <div class="row">
-               <div class="platform">
-                  <div id="platform"></div> 
-               </div>
-            </div>
-         </div>  
-      </div>
+      <div class="container sideBox" id="container0"></div>
+      <div class="container sideBox" id="container1"></div>
+      <div class="container sideBox" id="container2"></div>
+      <div class="container sideBox" id="container3"></div>
+      <div class="container sideBox" id="container4"></div>
       <div class="container sideBox" id="container5">
          <div id="source"></div>
          <div id="target"></div>
          <div id="descriptions"></div>
       </div>
    </div>
+   <div class="mask"></div>
+   <div class="maskData"></div>
    <div class="footer">
    </div>
 </body>

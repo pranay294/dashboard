@@ -265,9 +265,13 @@
       
       for( var prop in data ) {
          response += "<div style='position:absolute;bottom:0px;left:" + leftPos + "px;text-align:center;width:" + ( 2 * barWidth + 3 ) + "px;height:30px;'>" + prop + "</div>";
-         response += "<div type='" + type + "' class='chartdata' id='PassData" + prop + "' style='position:absolute;bottom:45px;left:" + leftPos + "px;float:left;background:#0096d6;font-weight:bold;padding:5px 0;color:#0f0;height:" + parseInt( ( data[prop].Pass * maxHeight ) / maxData ) +"px;width:" + barWidth + "px;'>" + data[prop].Pass + "</div>";
+         if( data[prop].Pass ) {
+            response += "<div type='" + type + "' class='chartdata' id='PassData" + prop + "' style='position:absolute;bottom:45px;left:" + leftPos + "px;float:left;background:#0096d6;font-weight:bold;padding:5px 0;color:#0f0;height:" + parseInt( ( data[prop].Pass * maxHeight ) / maxData ) +"px;width:" + barWidth + "px;'>" + data[prop].Pass + "</div>";
+         }
          leftPos += barWidth + 3;
-         response += "<div type='" + type + "' class='chartdata' id='FailData" + prop + "' style='position:absolute;bottom:45px;left:" + leftPos + "px;float:left;background:#606060;font-weight:bold;padding:5px 0;color:#ece038;height:" + parseInt( ( data[prop].Fail * maxHeight ) / maxData ) +"px;width:" + barWidth + "px;'>" + data[prop].Fail + "</div>";
+         if( data[prop].Fail ) {
+            response += "<div type='" + type + "' class='chartdata' id='FailData" + prop + "' style='position:absolute;bottom:45px;left:" + leftPos + "px;float:left;background:#606060;font-weight:bold;padding:5px 0;color:#ece038;height:" + parseInt( ( data[prop].Fail * maxHeight ) / maxData ) +"px;width:" + barWidth + "px;'>" + data[prop].Fail + "</div>";
+         }
          leftPos += barWidth + 3;
       }
       

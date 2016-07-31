@@ -13,7 +13,21 @@
    $(function() {
       registerEventsOnDomElements();
       initialize();
+      showdate();
    });
+   
+   function showdate() {
+      var date = new Date();
+      var monthName = [ "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      var year = 1900 + date.getYear();
+      var month = date.getMonth();
+      var day = date.getDate();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      
+      $(".dateTime").html( day + " " + monthName[month] + ", " + year + " " + hour + ":" + min  );
+      setTimeout( function() { showdate(); }, 60*1000 );
+   }
 
    /****************************************************
     * Function : registerEventsOnDomElements           *
@@ -35,6 +49,11 @@
       
       $(".logo").on( "click", function() {
          location.reload();
+      });
+      
+      $(".mask").on( "click", function() {
+         $(".mask").hide();
+         $(".maskData").hide();
       });
    };
    
@@ -78,36 +97,96 @@
               ( APPLICATION_DATA[index].Platform.indexOf( selectedPlatform ) > -1 ) ) {
             data.push( APPLICATION_DATA[index] );
             if( !testsPerApp[ APPLICATION_DATA[index].App_Name ] ) {
-               testsPerApp[ APPLICATION_DATA[index].App_Name ] = { Pass : 0, Fail : 0 };
+               testsPerApp[ APPLICATION_DATA[index].App_Name ] = { Pass : 0, Fail : 0, PassData : [], FailData : [] };
             }
             if( !testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ] ) {
-               testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ] = { Pass : 0, Fail : 0 };
+               testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ] = { Pass : 0, Fail : 0, PassData : [], FailData : [] };
             }
             if( !testsPerLocation[ APPLICATION_DATA[index].Executed_At ] ) {
-               testsPerLocation[ APPLICATION_DATA[index].Executed_At ] = { Pass : 0, Fail : 0 };
+               testsPerLocation[ APPLICATION_DATA[index].Executed_At ] = { Pass : 0, Fail : 0, PassData : [], FailData : [] };
             }
             if( !testsPerPlatform[ APPLICATION_DATA[index].Platform ] ) {
-               testsPerPlatform[ APPLICATION_DATA[index].Platform ] = { Pass : 0, Fail : 0 };
+               testsPerPlatform[ APPLICATION_DATA[index].Platform ] = { Pass : 0, Fail : 0, PassData : [], FailData : [] };
             }  
             if( !testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ] ) {
-               testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ] = { Pass : 0, Fail : 0 };
+               testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ] = { Pass : 0, Fail : 0, PassData : [], FailData : [] };
             }             
             
             if ( APPLICATION_DATA[index].Test_Result === "Pass" ) {
                pass++;
                testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ].Pass++;
+               testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ].PassData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerApp[ APPLICATION_DATA[index].App_Name ].Pass++;
+               testsPerApp[ APPLICATION_DATA[index].App_Name ].PassData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerLocation[ APPLICATION_DATA[index].Executed_At ].Pass++;
+               testsPerLocation[ APPLICATION_DATA[index].Executed_At ].PassData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerPlatform[ APPLICATION_DATA[index].Platform ].Pass++;
+               testsPerPlatform[ APPLICATION_DATA[index].Platform ].PassData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ].Pass++;
+               testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ].PassData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
             }
             else {
                fail++;
                testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ].Fail++;
+               testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ].FailData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });               
                testsPerApp[ APPLICATION_DATA[index].App_Name ].Fail++;
+               testsPerApp[ APPLICATION_DATA[index].App_Name ].FailData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerLocation[ APPLICATION_DATA[index].Executed_At ].Fail++;
+               testsPerLocation[ APPLICATION_DATA[index].Executed_At ].FailData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerPlatform[ APPLICATION_DATA[index].Platform ].Fail++;
+               testsPerPlatform[ APPLICATION_DATA[index].Platform ].FailData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
                testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ].Fail++;
+               testsPerCoreTeam[ APPLICATION_DATA[index].Pillar ].FailData.push({ 
+                  App_Version: APPLICATION_DATA[index].App_Version,
+                  Test_Case_Id: APPLICATION_DATA[index].Test_Case_Id,
+                  OBS_ID: APPLICATION_DATA[index].OBS_ID,
+                  Date: APPLICATION_DATA[index].Date
+               });
             }
          }
       }
@@ -116,87 +195,84 @@
 		$("#source").pieChart("#target");
       
       $("#descriptions").html( "Overall Pass percentage: " + parseInt((100 * pass) / ( pass + fail)) + "%");
+    
+      $("#container0").html( drawChart( testsPerCoreTeam, "Tests per Core Team", "Core" ) );
+      $("#container1").html( drawChart( testsPerApp, "Tests per App", "App" ) );
+      $("#container2").html( drawChart( testsPerSprint, "Tests per Sprint", "Sprint" ) );
+      $("#container3").html( drawChart( testsPerLocation, "Tests per Location", "Location" ) );
+      $("#container4").html( drawChart( testsPerPlatform, "Tests per Platform", "Platform" ) );
       
-      var arrayOfCoreTeams = [];
-      for ( var key in testsPerCoreTeam ) {
-         arrayOfCoreTeams.push( [[ testsPerCoreTeam[key].Pass, testsPerCoreTeam[key].Fail ], key ] );
+      $(".container .chart .chartdata").on( "click", function( ) {
+         var id = $(this).attr("id");
+         var resultType = id.substring( 0, 8 );
+         id = id.substring( 8, id.length );
+         $( ".mask" ).show();
+         switch( $(this).attr("type") ) {
+            case "Core" : $( ".maskData" ).html( drawDataInTable( testsPerCoreTeam[ id ][ resultType ], "Core Team", id ) ); break;
+            case "App" : $( ".maskData" ).html( drawDataInTable( testsPerApp[ id ][ resultType ], "App", id ) ); break;
+            case "Sprint" : $( ".maskData" ).html( drawDataInTable( testsPerSprint[ id ][ resultType ], "Sprint", id ) ); break;
+            case "Location" : $( ".maskData" ).html( drawDataInTable( testsPerLocation[ id ][ resultType ], "Location", id ) ); break;
+            case "Platform" : $( ".maskData" ).html( drawDataInTable( testsPerPlatform[ id ][ resultType ], "Platform", id ) ); break;
+            default : break;
+         }
+         $( ".maskData" ).show();
+      });    
+   };
+   
+   /****************************************************
+    * Function : drawDataInTable                       *
+    * Brief    : Draw data in table                    *
+    * Param    : data                                  *
+    * Param    : prop                                  *
+    * Param    : value                                 *
+    ****************************************************/
+   function drawDataInTable( data, prop, value ) {
+      var response = "<div class='tableHeader'>" + prop + ": " + value + "</div>";
+      response += "<table style='width:100%;text-align:left;border:1px solid black;'><tr><th>Date</th><th>App Version</th><th>Test Case ID</th><th>OBS ID</th></tr>";
+      for( var index = 0; index < data.length; index++ ) {
+         response += "<tr>";
+         response += "<td>" + data[index].Date + "</td>";
+         response += "<td>" + data[index].App_Version + "</td>";
+         response += "<td>" + data[index].Test_Case_Id + "</td>";
+         response += "<td>" + data[index].OBS_ID + "</td>";
+         response += "</tr>";
+      }
+      response += "</table>";
+      return response;
+   };
+   
+   /****************************************************
+    * Function : drawChart                             *
+    * Brief    : Draw chart for data                   *
+    * Param    : data                                  *
+    ****************************************************/ 
+   function drawChart( data , heading, type ) {
+      var maxHeight = 280;
+      var maxData = 0;
+      var leftPos = 0;
+      var barWidth = 40;
+      var response = "<div class='label'>";
+      response += "<span class='passLabel'></span>Pass<br/><br/>";
+      response += "<span class='failLabel'></span>Fail";
+      response += "</div>";
+      response += "<div class='heading'>" + heading + "</div>";
+      response += "<div class='chart'>";
+      
+      for( var prop1 in data ) {
+         maxData = Math.max( maxData, data[prop1].Pass );
+         maxData = Math.max( maxData, data[prop1].Fail );
       }
       
-      var arrayOfApps = [];
-      for ( var key in testsPerApp ) {
-         arrayOfApps.push( [[ testsPerApp[key].Pass, testsPerApp[key].Fail ], key ] );
+      for( var prop in data ) {
+         response += "<div style='position:absolute;bottom:0px;left:" + leftPos + "px;text-align:center;width:" + ( 2 * barWidth + 3 ) + "px;height:30px;'>" + prop + "</div>";
+         response += "<div type='" + type + "' class='chartdata' id='PassData" + prop + "' style='position:absolute;bottom:45px;left:" + leftPos + "px;float:left;background:#0096d6;font-weight:bold;padding:5px 0;color:#0f0;height:" + parseInt( ( data[prop].Pass * maxHeight ) / maxData ) +"px;width:" + barWidth + "px;'>" + data[prop].Pass + "</div>";
+         leftPos += barWidth + 3;
+         response += "<div type='" + type + "' class='chartdata' id='FailData" + prop + "' style='position:absolute;bottom:45px;left:" + leftPos + "px;float:left;background:#606060;font-weight:bold;padding:5px 0;color:#ece038;height:" + parseInt( ( data[prop].Fail * maxHeight ) / maxData ) +"px;width:" + barWidth + "px;'>" + data[prop].Fail + "</div>";
+         leftPos += barWidth + 3;
       }
       
-      var arrayOfSprints = [];
-      for ( var key in testsPerSprint ) {
-         arrayOfSprints.push( [[ testsPerSprint[key].Pass, testsPerSprint[key].Fail ], key ] );
-      }
-
-      var arrayOfLocation = [];
-      for ( var key in testsPerLocation ) {
-         arrayOfLocation.push( [[ testsPerLocation[key].Pass, testsPerLocation[key].Fail ], key ] );
-      }
-      
-      var arrayOfPlatform = [];
-      for ( var key in testsPerPlatform ) {
-         arrayOfPlatform.push( [[ testsPerPlatform[key].Pass, testsPerPlatform[key].Fail ], key ] );
-      }
-      
-      $(".app").html('<div id="app"></div>');
-      $(".coreteam").html('<div id="coreteam"></div>');
-      $(".sprint").html('<div id="sprint"></div>');
-      $(".location").html('<div id="location"></div>');
-      $(".platform").html('<div id="platform"></div>');
-      
-      $('#sprint').jqBarGraph({data: arrayOfSprints,
-         colors: ['#0096d6','#606060'],
-         legends: ['Pass','Fail'],
-         legend: true,
-         width: $(".row").width() * 0.9,
-         color: '#ffffff',
-         type: 'multi',
-         title: 'Tests per Sprint'
-      });
-      
-      $('#location').jqBarGraph({data: arrayOfLocation,
-         colors: ['#0096d6','#606060'],
-         legends: ['Pass','Fail'],
-         legend: true,
-         width: $(".row").width() * 0.9,
-         color: '#ffffff',
-         type: 'multi',
-         title: 'Tests per Location'
-      });
-      
-      $('#platform').jqBarGraph({data: arrayOfPlatform,
-         colors: ['#0096d6','#606060'],
-         legends: ['Pass','Fail'],
-         legend: true,
-         width: $(".row").width() * 0.9,
-         color: '#ffffff',
-         type: 'multi',
-         title: 'Tests per Platform'
-      });
-      
-      $('#app').jqBarGraph({data: arrayOfApps,
-         colors: ['#0096d6','#606060'],
-         legends: ['Pass','Fail'],
-         legend: true,
-         width: $(".row").width() * 0.9,
-         color: '#ffffff',
-         type: 'multi',
-         title: 'Tests per App'
-      });
-
-      $('#coreteam').jqBarGraph({data: arrayOfCoreTeams,
-         colors: ['#0096d6','#606060'],
-         legends: ['Pass','Fail'],
-         legend: true,
-         width: $(".row").width() * 0.9,
-         color: '#ffffff',
-         type: 'multi',
-         title: 'Tests per Core Team'
-      });      
+      response += "</div>";
+      return response;
    };
  
    /****************************************************

@@ -39,7 +39,7 @@ span.name { display:inline-block; }
 
 #source { font-weight:bold; font-size:16px; }
 #target { width:300px; height:300px; position:relative; left:40px; top:40px; right:40px; float:left; }
-#descriptions  { float:right; width:200px; height:200px; position:relative; bottom:10px; font-weight:bold; font-size:16px; }
+#descriptions  { float:right; width:200px; height:200px; position:relative; bottom:10px; font-weight:bold; font-size:16px; right:10px; }
 
 .mask { position:absolute; left:0; top:0; bottom:0; right:0; background:#000; opacity:0.4; z-index:4; display:none; }
 .maskData { position:absolute; left:25%; top:25%; max-height:50%; right:25%; background:#aaa; z-index:5; overflow:auto; padding:20px; display:none; opacity:1; border-radius:5px; }

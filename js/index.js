@@ -150,7 +150,7 @@
                   Date: APPLICATION_DATA[index].Date
                });
             }
-            else {
+            else if ( APPLICATION_DATA[index].Test_Result === "Fail" ) {
                fail++;
                testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ].Fail++;
                testsPerSprint[ APPLICATION_DATA[index].Sprint_Id ].FailData.push({ 
@@ -194,7 +194,7 @@
       $("#target").html("");
 		$("#source").pieChart("#target");
       
-      $("#descriptions").html( "Overall Pass percentage: " + parseInt((100 * pass) / ( pass + fail)) + "%");
+      $("#descriptions").html( "Overall Pass percentage: " + parseInt((100 * pass) / ( pass + fail)) + "%" + "<br/>" + "Total tests executed: " + parseInt( ( ( pass + fail) * 100 ) / APPLICATION_DATA.length ) + "%" );
     
       $("#container0").html( drawChart( testsPerCoreTeam, "Tests per Core Team", "Core" ) );
       $("#container1").html( drawChart( testsPerApp, "Tests per App", "App" ) );
